@@ -1,7 +1,8 @@
 import { getAllPosts } from '$lib/utils/posts';
+import type { PageLoad } from './$types';
 
-export function load() {
+export const load: PageLoad = () => {
 	return {
 		posts: getAllPosts()
 	};
-}
+};

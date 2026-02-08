@@ -20,4 +20,6 @@
 	<meta name="twitter:image" content={`${site.url}${site.defaultOgImage}`} />
 </svelte:head>
 
-<Layout {children} />
+<Layout>
+	{@render children()}
+</Layout>

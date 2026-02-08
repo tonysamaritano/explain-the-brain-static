@@ -1,6 +1,8 @@
 import { getAllPosts } from '$lib/utils/posts';
 import { site } from '$lib/seo/meta';
 
+export const prerender = true;
+
 function xmlEscape(value: string): string {
 	return value
 		.replaceAll('&', '&amp;')

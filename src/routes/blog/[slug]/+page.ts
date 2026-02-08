@@ -1,12 +1,13 @@
 import { error } from '@sveltejs/kit';
 import { getAllPosts, getPostBySlug } from '$lib/utils/posts';
 import { site } from '$lib/seo/meta';
+import type { EntryGenerator, PageLoad } from './$types';
 
-export function entries() {
+export const entries: EntryGenerator = () => {
 	return getAllPosts().map((post) => ({ slug: post.slug }));
-}
+};
 
-export function load({ params }: { params: { slug: string } }) {
+export const load: PageLoad = ({ params }) => {
 	const post = getPostBySlug(params.slug);
 	if (!post) {
 		throw error(404, 'Post not found');
@@ -21,4 +22,4 @@ export function load({ params }: { params: { slug: string } }) {
 			url: `${site.url}/blog/${post.slug}`
 		}
 	};
-}
+};

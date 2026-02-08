@@ -2,7 +2,7 @@
 title: Hello World
 date: 2026-02-08
 description: The first post for Explain The Brain.
-slug: hello-world
+slug: hello-world-2
 image: /brain_0.png
 ---
 

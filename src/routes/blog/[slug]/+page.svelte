@@ -1,17 +1,5 @@
 <script lang="ts">
-	import type { Post } from '$lib/utils/posts';
-
-	let { data }: {
-		data: {
-			post: Post;
-			meta: {
-				title: string;
-				description: string;
-				image: string;
-				url: string;
-			};
-		};
-	} = $props();
+	let { data } = $props();
 </script>
 
 <svelte:head>
@@ -28,8 +16,10 @@
 	<meta name="twitter:image" content={data.meta.image} />
 </svelte:head>
 
-<article class="prose">
+<article
+	class="prose max-w-none text-text prose-headings:text-text prose-p:text-text prose-li:text-text prose-li:my-0 prose-ul:my-2 prose-ol:my-2 prose-strong:text-text prose-a:text-accent prose-code:rounded prose-code:bg-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:text-text"
+>
 	<h1>{data.post.title}</h1>
-	<p class="meta">{data.post.date}</p>
+	<p class="!text-sm !text-muted">{data.post.date}</p>
 	{@html data.post.html}
 </article>
