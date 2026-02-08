@@ -6,8 +6,6 @@
 </script>
 
 <section>
-	<h1>Minimal writing on how minds and systems work.</h1>
-	<p>Short essays from explainthebrain.ai.</p>
+	<h1>Blog</h1>
+	<PostList posts={data.posts} />
 </section>
-
-<PostList posts={data.posts} emptyMessage="Posts are coming soon." />
