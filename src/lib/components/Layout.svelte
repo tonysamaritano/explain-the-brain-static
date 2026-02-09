@@ -8,7 +8,7 @@
 
 <div class="min-h-screen grid grid-rows-[auto_1fr_auto] bg-bg text-text font-sans tracking-tight">
 	<Header />
-	<main class="mx-auto w-full max-w-4xl px-4 py-8 pb-12">
+	<main class="w-full py-8 pb-12">
 		<Breadcrumbs />
 		{@render children?.()}
 	</main>

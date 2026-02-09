@@ -4,6 +4,7 @@ date: 2026-02-08
 description: How does the brain work as a system of components?
 slug: what-is-the-brain
 image: /brain_0.png
+color: #FA5C5C
 ---
 
 **What is the brain?**

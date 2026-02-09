@@ -3,7 +3,8 @@ title: Hello World
 date: 2026-02-08
 description: The first post for Explain The Brain.
 slug: hello-world-2
-image: /brain_0.png
+image: /brain_1.png
+color: #FFA239
 ---
 
 # Hello World

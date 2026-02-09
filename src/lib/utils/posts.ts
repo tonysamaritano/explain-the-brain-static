@@ -4,6 +4,7 @@ export type PostSummary = {
 	description: string;
 	slug: string;
 	image?: string;
+	color?: string;
 };
 
 export type Post = PostSummary & {
@@ -127,6 +128,7 @@ function parseMarkdownFile(raw: string, fallbackSlug: string): Post {
 	const description = frontmatter.description;
 	const slug = frontmatter.slug ?? fallbackSlug;
 	const image = frontmatter.image;
+	const color = frontmatter.color;
 
 	if (!title || !date || !description) {
 		throw new Error(`Post \"${fallbackSlug}\" is missing required frontmatter fields.`);
@@ -142,6 +144,7 @@ function parseMarkdownFile(raw: string, fallbackSlug: string): Post {
 		description,
 		slug,
 		image,
+		color,
 		html: markdownToHtml(body)
 	};
 }
@@ -154,6 +157,12 @@ function getPostFiles(): Record<string, string> {
 	}) as Record<string, string>;
 }
 
+import featuredSlugs from '$lib/content/featured.json';
+
+export function getFeaturedSlugs(): string[] {
+	return featuredSlugs;
+}
+
 export function getAllPosts(): PostSummary[] {
 	const posts = Object.entries(getPostFiles())
 		.map(([path, raw]) => {
@@ -164,12 +173,29 @@ export function getAllPosts(): PostSummary[] {
 				date: post.date,
 				description: post.description,
 				slug: post.slug,
-				image: post.image
+				image: post.image,
+				color: post.color
 			};
 		})
 		.sort((a, b) => (a.date < b.date ? 1 : -1));
 
 	return posts;
+}
+
+export function getPostsByLayout(): { featured: PostSummary[]; rest: PostSummary[] } {
+	const all = getAllPosts();
+	const slugOrder = getFeaturedSlugs();
+	const slugSet = new Set(slugOrder);
+
+	const postsBySlug = new Map(all.map((p) => [p.slug, p]));
+
+	const featured = slugOrder
+		.map((slug) => postsBySlug.get(slug))
+		.filter((p): p is PostSummary => p !== undefined);
+
+	const rest = all.filter((p) => !slugSet.has(p.slug));
+
+	return { featured, rest };
 }
 
 export function getPostBySlug(slug: string): Post | null {

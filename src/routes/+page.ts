@@ -1,8 +1,6 @@
-import { getAllPosts } from '$lib/utils/posts';
+import { getPostsByLayout } from '$lib/utils/posts';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = () => {
-	return {
-		posts: getAllPosts().slice(0, 5)
-	};
+	return getPostsByLayout();
 };
