@@ -9,13 +9,13 @@ color: #FA5C5C
 
 ## Something's Missing in AI
 
-I love AI. The latest models are astonishing feats of engineering — I use them every day and am constantly impressed by what they can do. But there’s a catch: these systems are not _truly_ intelligent. The only system we know that actually is intelligent sits between your ears. Evolution already solved the intelligence problem; today’s AI merely approximates it.
+I love AI. The latest models are astonishing feats of engineering — I use them every day and am constantly impressed by what they can do. But there’s a catch: these systems are not truly intelligent. The only system we know that _is_ truly intelligent sits between your ears. Evolution already solved the intelligence problem; today’s AI merely approximates it.
 
 ## The Cost of Approximation
 
-Today's frontier models work by predicting the next token. The scale required is insane, but surprisingly, it works amazingly well. The issue is that all it’s doing is approximating patterns in the sum of human knowledge — and that approximation requires an almost incomprehensible amount of data.
+Today’s frontier AI models work by predicting the next token. They work astonishingly well — but they are ultimately just approximating patterns in the sum of human knowledge, and that approximation requires an almost incomprehensible amount of data. The scale required to train them is _insane._
 
-How much, you ask? Great question. A trillion-parameter model trains on roughly one billion hours of text. At a realistic pace of reading eight hours a day, that's about 340,000 years of reading — roughly 3,000 to 4,000 human lifetimes. Even crazier is the energy required. In terms of turkey sandwich (~300 kcal/sandwich), that's like eating the equivalent of 287 billion turkey sandwiches. Not only would you need to start reading back in the stone age, but you'd need to also eat enough sandwiches that, if they were stacked on top of each other, the tower would stretch about **17 million kilometers — roughly 45 trips to the Moon.**
+How much, you ask? A frontier model trains on roughly one billion hours of text. At a realistic pace of reading eight hours a day, that’s about **340,000 years of reading — roughly 3,000 to 4,000 human lifetimes.** Even crazier is the energy required. In units of turkey sandwiches (~300 kcal per sandwich), that’s the equivalent of **287 billion turkey sandwiches.** Not only would you need to start reading back in the Stone Age, you’d also need to eat enough sandwiches that — if they were stacked like a tower — they would stretch about **17 million kilometers, roughly 45 trips to the Moon.**
 
 I don't know about you, but it _feels_ like there must be a better way — and there is. **It's called the brain**.
 
@@ -25,7 +25,7 @@ The people who understand the brain don't build AI, and the people who build AI 
 
 ## I'm Not Alone
 
-**The convergence:** The most respected minds in AI and neuroscience are independently arriving at the same verdict: current AI is missing something fundamental, and the brain holds the answer. They each see a piece of it. Each of them has a necessary piece; none of them has a complete, buildable stack. No one has yet closed the loop from brain principle → runnable agent → measurable capability. This project is about assembling the pieces.
+The most respected minds in AI and neuroscience are independently arriving at the same verdict: current AI is missing something fundamental, and the brain holds the answer. They each see a piece of it. Each of them has a necessary piece; none of them has a complete, buildable stack. No one has yet closed the loop from brain principle → runnable agent → measurable capability. This project is about assembling the pieces.
 
 **Yann LeCun** (Turing Award, former Chief AI Scientist at Meta, founder of AMI Labs) has publicly called LLMs "useful but fundamentally limited." He left Meta to build "world models" — AI that learns from sensory and spatial data to understand physical reality, not just predict text. His JEPA architecture predicts in latent representation space, not pixel space. _LeCun's position: AI needs internal models of how the world works._
 
