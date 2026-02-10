@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import type { PostSummary } from '$lib/utils/posts';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 	import Image from './Image.svelte';
@@ -10,7 +11,7 @@
 
 {#if featured}
 	<a
-		href={`/blog/${post.slug}`}
+		href={resolve(`/blog/${post.slug}`)}
 		class="card-link group block h-full w-full overflow-hidden rounded-3xl shadow-lg shadow-shadow transition-all duration-200 hover:opacity-90 hover:shadow-xl"
 		style="background-color: {post.color ?? 'var(--surface)'}"
 	>
@@ -34,7 +35,7 @@
 	</a>
 {:else}
 	<a
-		href={`/blog/${post.slug}`}
+		href={resolve(`/blog/${post.slug}`)}
 		class="card-link group block overflow-hidden rounded-2xl transition-all duration-200 hover:bg-surface hover:opacity-80 hover:shadow-lg"
 	>
 		{#if post.image}

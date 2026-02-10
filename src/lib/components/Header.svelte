@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { browser } from '$app/environment';
 	import Sun from 'lucide-svelte/icons/sun';
 	import Moon from 'lucide-svelte/icons/moon';
@@ -24,10 +25,10 @@
 
 <header class="border-b border-border p-4">
 	<nav class="mx-auto flex max-w-4xl items-center justify-between gap-4">
-		<a href="/" class="font-bold text-text no-underline hover:no-underline">Explain The Brain</a>
+		<a href={resolve('/')} class="font-bold text-text no-underline hover:no-underline">Explain The Brain</a>
 		<div class="flex items-center gap-3">
-			<a href="/" class="text-accent hover:underline">Home</a>
-			<a href="/about" class="text-accent hover:underline">About</a>
+			<a href={resolve('/')} class="text-accent hover:underline">Home</a>
+			<a href={resolve('/about')} class="text-accent hover:underline">About</a>
 			<button
 				type="button"
 				onclick={toggleTheme}
