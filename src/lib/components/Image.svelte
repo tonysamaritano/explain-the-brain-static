@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import imageMap from '$lib/generated/image-map.json';
 
 	let { src, alt, class: className = '' }: { src: string; alt: string; class?: string } = $props();
 
 	const entry = $derived((imageMap as Record<string, { webp: string; placeholder: string }>)[src]);
-	const resolvedSrc = $derived(entry?.webp ?? src);
+	const resolvedSrc = $derived(base + (entry?.webp ?? src));
 	const placeholder = $derived(entry?.placeholder);
 
 	let loaded = $state(false);
