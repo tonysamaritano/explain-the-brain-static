@@ -3,38 +3,30 @@
 </script>
 
 <script lang="ts">
-	import { page } from '$app/state';
-	import { browser } from '$app/environment';
 	import { env } from '$env/dynamic/public';
+	import { page } from '$app/state';
 
-	const id = env.PUBLIC_GA_MEASUREMENT_ID;
+	const id = env.PUBLIC_GA_MEASUREMENT_ID ?? '';
 
-	let initialized = $state(false);
+	const gtagSnippet = id
+		? `<script async src="https://www.googletagmanager.com/gtag/js?id=${id}"><\/script>` +
+			`<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}` +
+			`gtag('js',new Date());gtag('config','${id}');<\/script>`
+		: '';
+
 	let prevPath = $state('');
 
 	$effect(() => {
-		if (!browser || !id || initialized) return;
-
-		const script = document.createElement('script');
-		script.async = true;
-		script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
-		document.head.appendChild(script);
-
-		window.dataLayer = window.dataLayer || [];
-		window.gtag = function () {
-			window.dataLayer.push(arguments);
-		};
-		window.gtag('js', new Date());
-		window.gtag('config', id);
-
-		initialized = true;
-	});
-
-	$effect(() => {
 		const path = page.url.pathname;
-		if (id && initialized && path !== prevPath) {
+		if (id && path !== prevPath) {
 			prevPath = path;
-			gtag('config', id, { page_path: path });
+			if (typeof gtag === 'function') {
+				gtag('config', id, { page_path: path });
+			}
 		}
 	});
 </script>
+
+<svelte:head>
+	{@html gtagSnippet}
+</svelte:head>
