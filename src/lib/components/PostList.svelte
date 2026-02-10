@@ -20,7 +20,7 @@
 				style="scrollbar-width: none;"
 			>
 				{#each featured as post (post.slug)}
-					<div class="w-[90%] shrink-0 snap-center md:w-[75%]">
+					<div class="flex w-[90%] shrink-0 snap-center md:w-[75%]">
 						<PostCard {post} featured />
 					</div>
 				{/each}

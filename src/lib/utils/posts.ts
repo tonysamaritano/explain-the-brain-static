@@ -36,46 +36,63 @@ function markdownToHtml(markdown: string): string {
 	const lines = markdown.split(/\r?\n/);
 	const html: string[] = [];
 	let inList = false;
+	let blockquoteLines: string[] = [];
+
+	function closeList() {
+		if (inList) {
+			html.push('</ul>');
+			inList = false;
+		}
+	}
+
+	function closeBlockquote() {
+		if (blockquoteLines.length > 0) {
+			html.push(`<blockquote><p>${blockquoteLines.join('<br>')}</p></blockquote>`);
+			blockquoteLines = [];
+		}
+	}
 
 	for (const rawLine of lines) {
 		const line = rawLine.trim();
 
 		if (line === '') {
-			if (inList) {
-				html.push('</ul>');
-				inList = false;
+			closeList();
+			closeBlockquote();
+			continue;
+		}
+
+		if (line.startsWith('> ') || line === '>') {
+			closeList();
+			const content = line.slice(2).trim();
+			if (content) {
+				blockquoteLines.push(inlineMarkdown(content));
 			}
 			continue;
 		}
 
 		if (line.startsWith('### ')) {
-			if (inList) {
-				html.push('</ul>');
-				inList = false;
-			}
+			closeList();
+			closeBlockquote();
 			html.push(`<h3>${inlineMarkdown(line.slice(4))}</h3>`);
 			continue;
 		}
 
 		if (line.startsWith('## ')) {
-			if (inList) {
-				html.push('</ul>');
-				inList = false;
-			}
+			closeList();
+			closeBlockquote();
 			html.push(`<h2>${inlineMarkdown(line.slice(3))}</h2>`);
 			continue;
 		}
 
 		if (line.startsWith('# ')) {
-			if (inList) {
-				html.push('</ul>');
-				inList = false;
-			}
+			closeList();
+			closeBlockquote();
 			html.push(`<h1>${inlineMarkdown(line.slice(2))}</h1>`);
 			continue;
 		}
 
 		if (line.startsWith('- ')) {
+			closeBlockquote();
 			if (!inList) {
 				html.push('<ul>');
 				inList = true;
@@ -84,17 +101,14 @@ function markdownToHtml(markdown: string): string {
 			continue;
 		}
 
-		if (inList) {
-			html.push('</ul>');
-			inList = false;
-		}
+		closeList();
+		closeBlockquote();
 
 		html.push(`<p>${inlineMarkdown(line)}</p>`);
 	}
 
-	if (inList) {
-		html.push('</ul>');
-	}
+	closeList();
+	closeBlockquote();
 
 	return html.join('\n');
 }

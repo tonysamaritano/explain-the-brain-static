@@ -10,10 +10,10 @@
 {#if featured}
 	<a
 		href={`/blog/${post.slug}`}
-		class="group block w-full overflow-hidden rounded-3xl shadow-lg hover:shadow-xl shadow-shadow transition-all duration-200 hover:opacity-90"
+		class="group block h-full w-full overflow-hidden rounded-3xl shadow-lg shadow-shadow transition-all duration-200 hover:opacity-90 hover:shadow-xl"
 		style="background-color: {post.color ?? 'var(--surface)'}"
 	>
-		<div class="grid grid-cols-1 lg:grid-cols-2">
+		<div class="grid h-full grid-cols-1 lg:grid-cols-2">
 			{#if post.image}
 				<div class="aspect-square overflow-hidden">
 					<img

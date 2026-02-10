@@ -2,12 +2,16 @@
 	import { page } from '$app/state';
 	import ChevronRight from 'lucide-svelte/icons/chevron-right';
 
+	const nonPageSegments = new Set(['blog']);
+
 	const crumbs = $derived.by(() => {
 		const segments = page.url.pathname.split('/').filter(Boolean);
-		return segments.map((segment, i) => ({
-			label: segment.replaceAll('-', ' '),
-			href: '/' + segments.slice(0, i + 1).join('/')
-		}));
+		return segments
+			.filter((segment) => !nonPageSegments.has(segment))
+			.map((segment, i, arr) => ({
+				label: segment.replaceAll('-', ' '),
+				href: '/' + segments.slice(0, segments.indexOf(arr[i]) + 1).join('/')
+			}));
 	});
 </script>
 

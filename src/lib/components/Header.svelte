@@ -28,7 +28,6 @@
 		<div class="flex items-center gap-3">
 			<a href="/" class="text-accent hover:underline">Home</a>
 			<a href="/about" class="text-accent hover:underline">About</a>
-			<a href="/blog" class="text-accent hover:underline">Blog</a>
 			<button
 				type="button"
 				onclick={toggleTheme}
