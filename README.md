@@ -42,7 +42,9 @@ The site deploys automatically to GitHub Pages on every push to `main` via GitHu
 2. Under **Source**, select **GitHub Actions**
 3. Push to `main` — the workflow handles the rest
 
-The workflow sets `BASE_PATH` to the repo name automatically, so all links and assets resolve correctly under the GitHub Pages subdirectory.
+If you're using a **custom domain** (e.g. `explainthebrain.ai`), no extra config is needed — the site serves from the root.
+
+If you're **not** using a custom domain and the site is at `username.github.io/repo-name/`, add a `BASE_PATH` repository variable set to `/repo-name` (see Environment Variables below).
 
 ### Google Analytics
 
@@ -70,7 +72,7 @@ If the variable is not set, analytics is completely disabled — no scripts are 
 | Variable | Where to set | Description |
 |---|---|---|
 | `PUBLIC_GA_MEASUREMENT_ID` | GitHub repo variable / `.env` | Google Analytics measurement ID. Not source controlled. |
-| `BASE_PATH` | Set automatically by CI | GitHub Pages subdirectory prefix. No need to set manually. |
+| `BASE_PATH` | GitHub repo variable / `.env` | Only needed without a custom domain. Set to `/repo-name` for `username.github.io/repo-name/` deploys. Leave unset for custom domains. |
 
 ## Adding Content
 
