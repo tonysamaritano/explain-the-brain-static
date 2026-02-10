@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PostSummary } from '$lib/utils/posts';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
+	import Image from './Image.svelte';
 
 	let { post, featured = false }: { post: PostSummary; featured?: boolean } = $props();
 
@@ -10,16 +11,16 @@
 {#if featured}
 	<a
 		href={`/blog/${post.slug}`}
-		class="group block h-full w-full overflow-hidden rounded-3xl shadow-lg shadow-shadow transition-all duration-200 hover:opacity-90 hover:shadow-xl"
+		class="card-link group block h-full w-full overflow-hidden rounded-3xl shadow-lg shadow-shadow transition-all duration-200 hover:opacity-90 hover:shadow-xl"
 		style="background-color: {post.color ?? 'var(--surface)'}"
 	>
 		<div class="grid h-full grid-cols-1 lg:grid-cols-2">
 			{#if post.image}
 				<div class="aspect-square overflow-hidden">
-					<img
+					<Image
 						src={post.image}
 						alt={post.title}
-						class="h-full w-full object-cover"
+						class="h-full w-full"
 					/>
 				</div>
 			{/if}
@@ -34,14 +35,14 @@
 {:else}
 	<a
 		href={`/blog/${post.slug}`}
-		class="group block overflow-hidden rounded-2xl transition-all duration-200 hover:bg-surface hover:opacity-80 hover:shadow-lg"
+		class="card-link group block overflow-hidden rounded-2xl transition-all duration-200 hover:bg-surface hover:opacity-80 hover:shadow-lg"
 	>
 		{#if post.image}
 			<div class="aspect-[3/2] overflow-hidden">
-				<img
+				<Image
 					src={post.image}
 					alt={post.title}
-					class="h-full w-full object-cover"
+					class="h-full w-full"
 				/>
 			</div>
 		{/if}

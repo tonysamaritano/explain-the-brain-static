@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import Layout from '$lib/components/Layout.svelte';
+	import Analytics from '$lib/components/Analytics.svelte';
 	import { site } from '$lib/seo/meta';
 
 	let { children } = $props();
@@ -19,6 +20,8 @@
 	<meta name="twitter:description" content={site.description} />
 	<meta name="twitter:image" content={`${site.url}${site.defaultOgImage}`} />
 </svelte:head>
+
+<Analytics />
 
 <Layout>
 	{@render children()}
