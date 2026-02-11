@@ -3,7 +3,7 @@ title: Why Explain the Brain?
 date: 2026-02-09
 description: The brain is the only system we know of that is truly intelligent. Let's build it.
 slug: why-explain-the-brain
-image: /brain_0.png
+image: /brain_0.webp
 color: #FA5C5C
 ---
 

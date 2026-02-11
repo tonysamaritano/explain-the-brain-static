@@ -17,7 +17,7 @@
 </svelte:head>
 
 <article
-	class="prose mx-auto max-w-4xl px-4 text-text prose-headings:text-text prose-p:text-text prose-li:text-text prose-li:my-0 prose-ul:my-2 prose-ol:my-2 prose-strong:text-text prose-a:text-accent prose-code:rounded prose-code:bg-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:text-text prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:text-muted prose-blockquote:not-italic [&_blockquote_p]:before:content-none [&_blockquote_p]:after:content-none"
+	class="prose mx-auto max-w-4xl min-w-0 overflow-hidden px-4 text-text prose-headings:text-text prose-p:text-text prose-li:text-text prose-li:my-0 prose-ul:my-2 prose-ol:my-2 prose-strong:text-text prose-a:text-accent prose-code:rounded prose-code:bg-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:text-text prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:text-muted prose-blockquote:not-italic [&_blockquote_p]:before:content-none [&_blockquote_p]:after:content-none prose-pre:bg-transparent prose-pre:p-0 prose-pre:max-w-full prose-table:text-text prose-th:text-text prose-td:text-text prose-th:border-border prose-td:border-border [&_pre_code]:bg-transparent [&_pre_code]:p-0"
 >
 	<h1>{data.post.title}</h1>
 	<p class="!text-sm !text-muted">{data.post.date}</p>

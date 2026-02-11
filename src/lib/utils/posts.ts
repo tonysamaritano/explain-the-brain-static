@@ -1,3 +1,5 @@
+import hljs from 'highlight.js';
+
 export type PostSummary = {
 	title: string;
 	date: string;
@@ -32,11 +34,33 @@ function inlineMarkdown(text: string): string {
 		.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
 }
 
+function parseTable(lines: string[]): string {
+	const rows = lines.map((line) =>
+		line
+			.replace(/^\|/, '')
+			.replace(/\|$/, '')
+			.split('|')
+			.map((cell) => cell.trim())
+	);
+
+	const headerCells = rows[0];
+	const bodyRows = rows.slice(2); // skip header + separator
+
+	const thead = `<thead><tr>${headerCells.map((c) => `<th>${inlineMarkdown(c)}</th>`).join('')}</tr></thead>`;
+	const tbody = bodyRows
+		.map((row) => `<tr>${row.map((c) => `<td>${inlineMarkdown(c)}</td>`).join('')}</tr>`)
+		.join('\n');
+
+	return `<div class="table-wrapper"><table>${thead}<tbody>${tbody}</tbody></table></div>`;
+}
+
 function markdownToHtml(markdown: string): string {
 	const lines = markdown.split(/\r?\n/);
 	const html: string[] = [];
 	let inList = false;
 	let blockquoteLines: string[] = [];
+	let codeBlock: { lang: string; lines: string[] } | null = null;
+	let tableLines: string[] = [];
 
 	function closeList() {
 		if (inList) {
@@ -52,8 +76,52 @@ function markdownToHtml(markdown: string): string {
 		}
 	}
 
+	function closeTable() {
+		if (tableLines.length > 0) {
+			html.push(parseTable(tableLines));
+			tableLines = [];
+		}
+	}
+
 	for (const rawLine of lines) {
+		// Handle fenced code blocks
+		if (codeBlock !== null) {
+			if (rawLine.trim() === '```') {
+				const code = codeBlock.lines.join('\n');
+				let highlighted: string;
+				if (codeBlock.lang && hljs.getLanguage(codeBlock.lang)) {
+					highlighted = hljs.highlight(code, { language: codeBlock.lang }).value;
+				} else {
+					highlighted = hljs.highlightAuto(code).value;
+				}
+				html.push(`<pre><code class="hljs${codeBlock.lang ? ` language-${codeBlock.lang}` : ''}">${highlighted}</code></pre>`);
+				codeBlock = null;
+			} else {
+				codeBlock.lines.push(rawLine);
+			}
+			continue;
+		}
+
+		if (rawLine.trim().startsWith('```')) {
+			closeList();
+			closeBlockquote();
+			closeTable();
+			const lang = rawLine.trim().slice(3).trim();
+			codeBlock = { lang, lines: [] };
+			continue;
+		}
+
 		const line = rawLine.trim();
+
+		// Handle table rows
+		if (line.startsWith('|') && line.endsWith('|')) {
+			closeList();
+			closeBlockquote();
+			tableLines.push(line);
+			continue;
+		} else {
+			closeTable();
+		}
 
 		if (line === '') {
 			closeList();
@@ -109,6 +177,7 @@ function markdownToHtml(markdown: string): string {
 
 	closeList();
 	closeBlockquote();
+	closeTable();
 
 	return html.join('\n');
 }

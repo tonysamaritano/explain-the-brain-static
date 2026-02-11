@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'highlight.js/styles/github-dark.css';
 @plugin '@tailwindcss/typography';
 
 @theme {
@@ -9,6 +10,7 @@
 	--color-border: var(--border);
 	--color-accent: var(--accent);
 	--color-shadow: var(--shadow);
+	--color-bg-code: var(--bg-code);
 	--font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -21,6 +23,7 @@
 	--border: light-dark(hsl(0, 0%, 85%), hsl(0, 0%, 15%));
 	--accent: light-dark(hsl(213, 75%, 60%), hsl(213, 75%, 50%));
 	--shadow: light-dark(hsl(0, 0%, 0%, 0.15), hsla(0, 0%, 0%, 0.4));
+	--bg-code: light-dark(hsl(220, 13%, 20%), hsl(220, 13%, 14%));
 }
 
 :root[data-theme='light'] {
@@ -29,6 +32,23 @@
 
 :root[data-theme='dark'] {
 	color-scheme: dark;
+}
+
+pre:has(code.hljs) {
+	@apply max-w-full overflow-x-auto rounded-lg bg-bg-code p-4;
+	box-shadow: inset 0 10px 15px -3px var(--shadow), inset 0 4px 6px -4px var(--shadow);
+}
+
+pre code.hljs {
+	@apply block p-4 bg-transparent;
+}
+
+.table-wrapper {
+	@apply max-w-full overflow-x-auto rounded-lg bg-surface px-4;
+}
+
+.table-wrapper table {
+	@apply min-w-lg;
 }
 
 a:not(.card-link) {

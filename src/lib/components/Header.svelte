@@ -8,7 +8,7 @@
 		if (!browser) return 'light';
 		const saved = localStorage.getItem('theme');
 		if (saved === 'light' || saved === 'dark') return saved;
-		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+		return 'light';
 	}
 
 	let theme: 'light' | 'dark' = $state(getInitialTheme());
@@ -23,7 +23,7 @@
 	}
 </script>
 
-<header class="border-b border-border p-4">
+<header class="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur-sm p-4">
 	<nav class="mx-auto flex max-w-4xl items-center justify-between gap-4">
 		<a href={resolve('/')} class="font-bold text-text no-underline hover:no-underline">Explain The Brain</a>
 		<div class="flex items-center gap-3">
