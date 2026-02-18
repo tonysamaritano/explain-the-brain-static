@@ -49,6 +49,8 @@ Prediction error is the name of the game for the cortex, and grounding a world m
 
 Absolutely. In machine learning, the space that a manifold lives in is called **latent space**. I'm not going to waste time cataloging every model that can learn a latent representation — the one we're going to use for this set of experiments is an **autoencoder**.
 
+![Autoencoder Architecture](/autoencoder_0.webp)
+
 This beautifully simple network is what's called an **unsupervised** model. In a nutshell, that just means the training data don't require labels — just like the brain. It's made up of three parts: an encoder, a bottleneck, and a decoder. The objective is to reconstruct its own inputs. But the magic isn't the reconstruction — it's the **compression**. The autoencoder is forced to squeeze high-dimensional data (like an image) into a much lower-dimensional **latent representation**. That compression is what builds the manifold.
 
 First, we're going to build one and train it on the classic MNIST handwritten digits dataset — it conveniently produces a very clean manifold in latent space when trained correctly. After that, we're going to watch it fail miserably when we give it almost no data. Then we're going to experiment with how the brain _probably_ overcomes this data limitation. We'll show where the gains actually come from and tie it all back to how evolution gave the brain the ability to build rich models of the world.
